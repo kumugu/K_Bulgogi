@@ -1,4 +1,4 @@
-package com.kumugu.bulgogi.model;
+package com.bulgogi.model;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,7 +1,7 @@
-package com.kumugu.bulgogi.service;
+package com.bulgogi.service;
 
-import com.kumugu.bulgogi.model.User;
-import com.kumugu.bulgogi.repository.UserRepository;
+import com.bulgogi.model.User;
+import com.bulgogi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

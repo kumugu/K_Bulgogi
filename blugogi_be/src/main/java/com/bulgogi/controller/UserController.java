@@ -1,8 +1,8 @@
-package com.kumugu.bulgogi.controller;
+package com.bulgogi.controller;
 
 
-import com.kumugu.bulgogi.model.User;
-import com.kumugu.bulgogi.service.UserService;
+import com.bulgogi.model.User;
+import com.bulgogi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

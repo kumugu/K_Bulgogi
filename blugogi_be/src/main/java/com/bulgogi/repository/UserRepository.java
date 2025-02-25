@@ -1,6 +1,6 @@
-package com.kumugu.bulgogi.repository;
+package com.bulgogi.repository;
 
-import com.kumugu.bulgogi.model.User;
+import com.bulgogi.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.expression.spel.ast.OpInc;
 
