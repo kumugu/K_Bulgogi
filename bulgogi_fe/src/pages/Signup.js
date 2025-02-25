@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -7,6 +8,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +25,10 @@ const Signup = () => {
 
       if (response.status === 200) {
         setMessage('회원가입이 완료되었습니다!');
+        // 회원가입이 성공하면 로그인 페이지로 이동
+        setTimeout(() => {
+          navigate('/login'); // 로그인 페이지로 리다이렉트
+        }, 1000); // 1초 후 리다이렉트 (UX 고려)
       }
     } catch (error) {
       setMessage('회원가입에 실패했습니다. 다시 시도해 주세요.');

@@ -2,6 +2,7 @@ package com.bulgogi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,9 +30,11 @@ public class SecurityConfig {
                     return config;
                 }))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/", "/join").permitAll() // 공개 경로 설정
-                        .anyRequest().authenticated()); // 나머지 요청은 인증 필요
+                        .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/").permitAll() // 공개 경로 설정
+                        .requestMatchers(HttpMethod.GET, "/api/v1/posts/**").permitAll()
+                        .anyRequest().authenticated() // 인증된 사용자만 접근 가능
+                );
+
         return http.build();
     }
-
 }

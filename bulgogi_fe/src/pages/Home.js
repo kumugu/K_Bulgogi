@@ -1,16 +1,14 @@
 import React from 'react';
-import Navbar from './Navbar';
+import Navbar from '../components/Navbar'; 
 
 const Home = () => {
   return (
     <div>
       <Navbar />
       <div style={styles.homeContainer}>
-        <h1 style={styles.heading}>Welcome to MyBlog</h1>
+        <h1 style={styles.heading}>Welcome to Bulgogi</h1>
         <p style={styles.subheading}>A platform to share your thoughts with the world</p>
         <div style={styles.buttons}>
-          <button style={styles.button}>회원가입</button>
-          <button style={styles.button}>로그인</button>
         </div>
       </div>
     </div>
