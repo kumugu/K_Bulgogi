@@ -1,0 +1,13 @@
+package com.kumugu.bulgogi.repository;
+
+import com.kumugu.bulgogi.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.expression.spel.ast.OpInc;
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUsername(String username);
+    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
+}
