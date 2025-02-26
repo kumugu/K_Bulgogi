@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ setUsername }) => {
+const Login = () => {
   const [username, setUsernameInput] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -12,17 +11,29 @@ const Login = ({ setUsername }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/api/v1/auth/login', {
-        username,
-        password,
+      const response = await fetch("http://localhost:8080/api/v1/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
       });
 
-      // 로그인 성공 시, 사용자 이름을 상태로 설정하고 로컬 스토리지에 저장
-      setUsername(username);
-      localStorage.setItem('username', username); // 로컬 스토리지에 저장
-      navigate('/profile', { state: { username } });
+      if (!response.ok) {
+        setError("로그인 실패! 아이디 또는 비밀번호를 확인하세요.");
+        return;
+      }
+
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+
+      console.log("로그인 성공:", data);
+
+      // 마이페이지로 이동
+      navigate("/mypage");
     } catch (error) {
-      setError('로그인 실패: ' + (error.response?.data || '알 수 없는 오류'));
+      console.error("API 요청 실패:", error);
+      setError("서버 오류가 발생했습니다. 다시 시도해주세요.");
     }
   };
 

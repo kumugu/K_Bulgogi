@@ -1,13 +1,26 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* 커스텀 CSS */
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-bulgogi-primary text-white font-medium rounded-lg shadow transition-colors hover:bg-red-500;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-gray-600 text-white font-medium rounded-lg shadow transition-colors hover:bg-gray-700;
+  }
+
+  .card {
+    @apply bg-white p-6 rounded-lg shadow-md;
+  }
+
+  .form-input {
+    @apply w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bulgogi-primary;
+  }
+
+  .page-container {
+    @apply min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4;
+  }
 }

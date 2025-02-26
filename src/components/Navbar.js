@@ -1,13 +1,24 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = ({ username, setUsername }) => {
+const Navbar = () => {
+  const [username, setUsername] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // JWT에서 username 추출 (백엔드에서 `/api/v1/auth/me` 같은 API 필요)
+      fetchProfile(token).then(user => {
+        if (user) setUsername(user.username);
+      });
+    }
+  }, []);
+
   const handleLogout = () => {
-    setUsername(''); // 상태 초기화
-    localStorage.removeItem('username'); // 로컬 스토리지에서 삭제
-    navigate('/login'); // 로그인 페이지로 리다이렉트
+    localStorage.removeItem("token");
+    setUsername(""); // 상태 초기화
+    navigate("/login", { replace: true }); // replace 추가
   };
 
   return (
@@ -30,6 +41,27 @@ const Navbar = ({ username, setUsername }) => {
   );
 };
 
+// 프로필 가져오는 함수
+const fetchProfile = async (token) => {
+  if (!token) return null;
+
+  try {
+    const response = await fetch("http://localhost:8080/api/v1/auth/me", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) throw new Error("인증 실패");
+
+    return await response.json(); // { username: "testUser" } 같은 응답 예상
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 const styles = {
   navbar: {
     display: 'flex',
@@ -44,20 +76,15 @@ const styles = {
     right: 0,
     zIndex: 10,
   },
-  logo: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  navLinks: {
-    display: 'flex',
-    gap: '15px',
-  },
   link: {
     fontSize: '16px',
     color: '#333',
     textDecoration: 'none',
     fontWeight: '500',
+  },
+  navLinks: {
+    display: 'flex',
+    gap: '15px',
   },
   logoutButton: {
     fontSize: '16px',
