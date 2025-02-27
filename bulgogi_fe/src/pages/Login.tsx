@@ -29,7 +29,10 @@ export default function LoginPage() {
 
       const data = await response.json()
       localStorage.setItem("token", data.token)
+
+      window.dispatchEvent(new Event("login-success"))
       console.log("로그인 성공:", data)
+      
       navigate("/blogHome")
     } catch (error) {
       console.error("API 요청 실패:", error)
