@@ -24,7 +24,6 @@ public class AuthController {
         this.userService = userService;
     }
 
-
     // 회원가입
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody UserRequestDTO userRequestDTO) {
