@@ -2,25 +2,71 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 커스텀 CSS */
-@layer components {
-  .btn-primary {
-    @apply px-4 py-2 bg-bulgogi-primary text-white font-medium rounded-lg shadow transition-colors hover:bg-red-500;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 80%;
+
+    --radius: 0.5rem;
   }
 
-  .btn-secondary {
-    @apply px-4 py-2 bg-gray-600 text-white font-medium rounded-lg shadow transition-colors hover:bg-gray-700;
+  .bg-background {
+    background-color: hsl(var(--background));
   }
 
-  .card {
-    @apply bg-white p-6 rounded-lg shadow-md;
+  .text-foreground {
+    color: hsl(var(--foreground));
   }
 
-  .form-input {
-    @apply w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bulgogi-primary;
+  body {
+    @apply bg-background text-foreground antialiased;
   }
 
-  .page-container {
-    @apply min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4;
+  /* Typography enhancements */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply tracking-tight;
+  }
+
+  /* Add serif font for headings */
+  .font-serif {
+    font-family: "Georgia", serif;
   }
 }
+
+@layer components {
+  /* Medium-style link underline animation */
+  .link-underline {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full;
+  }
+}
+

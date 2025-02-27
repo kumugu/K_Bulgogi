@@ -51,7 +51,7 @@ export const fetchProfile = async () => {
   }
 
   try {
-    const response = await axios.get(`${API_URL}/auth/my`, {
+    const response = await axios.get(`${API_URL}/blogHome`, { //경로 수정 필요할듯 
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -61,6 +61,17 @@ export const fetchProfile = async () => {
   } catch (error) {
     console.error('Fetch profile error:', error);
     throw new Error('프로필을 불러오는 데 실패했습니다.');
+  }
+};
+
+// 유저 이름 가져오기 함수
+export const getUserName = async () => {
+  try {
+    const profile = await fetchProfile();
+    return profile.username; // 반환할 유저 이름
+  } catch (error) {
+    console.error('Get user name error:', error);
+    throw new Error('유저 이름을 가져오는 데 실패했습니다.');
   }
 };
 
