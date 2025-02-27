@@ -24,4 +24,7 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private String role = "ROLE_USER";
 }

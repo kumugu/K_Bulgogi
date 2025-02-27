@@ -51,7 +51,7 @@ export const fetchProfile = async () => {
   }
 
   try {
-    const response = await axios.get(`${API_URL}/blogHome`, { //경로 수정 필요할듯 
+    const response = await axios.get(`${API_URL}/users/profile`, { //경로 수정 필요할듯 
       headers: {
         'Authorization': `Bearer ${token}`
       }
