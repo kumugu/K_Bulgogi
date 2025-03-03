@@ -101,22 +101,22 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-4 gap-8">
             {[
               {
-                name: "Alex Kim",
+                name: "Kumgu Kim",
                 role: "Founder & CEO",
                 image: "/placeholder.svg?height=300&width=300",
               },
               {
-                name: "Jordan Park",
+                name: "Buha jikwon 1",
                 role: "Head of Design",
                 image: "/placeholder.svg?height=300&width=300",
               },
               {
-                name: "Taylor Lee",
+                name: "Buha jikwon 2",
                 role: "Lead Developer",
                 image: "/placeholder.svg?height=300&width=300",
               },
               {
-                name: "Casey Choi",
+                name: "Buha jikwon 3",
                 role: "Community Manager",
                 image: "/placeholder.svg?height=300&width=300",
               },

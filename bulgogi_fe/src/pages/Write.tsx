@@ -73,7 +73,7 @@ export default function WritePage() {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="제목을 입력하세요"
+          placeholder="Enter title..."
           className="w-full text-4xl font-serif font-bold mb-8 p-2 border-none focus:outline-none focus:ring-0 placeholder:text-neutral-300"
         />
 
@@ -93,7 +93,7 @@ export default function WritePage() {
             value={currentTag}
             onChange={(e) => setCurrentTag(e.target.value)}
             onKeyDown={handleAddTag}
-            placeholder="태그를 입력하세요"
+            placeholder="Enter tags..."
             className="flex-grow p-2 border-none focus:outline-none focus:ring-0 text-sm placeholder:text-neutral-300"
           />
         </div>
@@ -117,7 +117,7 @@ export default function WritePage() {
             className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 rounded-md text-neutral-600 hover:bg-neutral-50 transition-colors duration-200"
           >
             <Save className="h-4 w-4" />
-            {isSaving ? "저장 중..." : "임시저장"}
+            {isSaving ? "Saving..." : "Save Draft"}
           </button>
           <button
             onClick={handlePublish}
@@ -125,7 +125,7 @@ export default function WritePage() {
             className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 rounded-md text-white hover:bg-neutral-800 transition-colors duration-200"
           >
             <Send className="h-4 w-4" />
-            {isPublishing ? "발행 중..." : "발행하기"}
+            {isPublishing ? "Publishing..." : "Publish"}
           </button>
         </div>
       </div>
