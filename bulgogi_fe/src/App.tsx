@@ -5,8 +5,10 @@ import SignupPage from "./pages/Signup"
 import AboutPage from "./pages/About"
 import BlogHome from "./pages/BlogHome"
 import WritePage from "./pages/Write"
-import Navigation from "./components/Navigation" // Navigation 컴포넌트 임포트
-import "./index.css" // Tailwind CSS와 커스텀 스타일 임포트
+import MyBlog from "./pages/MyBlog"
+import SettingsPage from "./pages/Settings"
+import Navigation from "./components/Navigation" 
+import "./index.css" 
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/blogHome" element={<BlogHome />} />
         <Route path="/write" element={<WritePage />} /> 
+        <Route path="/myblog" element={<MyBlog />} />
+        <Route path="/settings" element={<SettingsPage />} />
       </Routes>
     </Router>
   )
