@@ -2,12 +2,14 @@ package com.bulgogi.security;
 
 import com.bulgogi.model.User;
 import com.bulgogi.repository.UserRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
+@Primary
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
