@@ -17,8 +17,8 @@ public class UserSocialLink {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_settings_id", nullable = false)
-    private UserSettings userSettings;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(nullable = false)
     private String socialPlatform;

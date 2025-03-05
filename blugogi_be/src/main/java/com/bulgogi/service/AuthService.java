@@ -44,7 +44,6 @@ public class AuthService {
                 .emailMarketing(true)  // 마케팅 이메일 수신 (기본값: true)
                 .emailPostNotifications(true)  // 게시글 알림 여부 (기본값: true)
                 .emailCommentNotifications(true)  // 댓글 알림 여부 (기본값: true)
-                .socialLinks(new HashSet<>())  // 빈 소셜 링크 맵
                 .build();
 
         userSettingsRepository.save(userSettings); // 정상 호출 가능

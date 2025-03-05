@@ -23,22 +23,20 @@ public class UserSettings {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false)
-    private boolean emailMarketing = true;  // 마케팅 이메일 수신
-    @Column(nullable = false)
-    private boolean emailPostNotifications = true;  // 게시글 알림 여부
-    @Column(nullable = false)
-    private boolean emailCommentNotifications = true;   // 댓글 알림 여부
+    private String bio;
+    private String theme;
+    private String language;
+    private boolean emailMarketing;
+    private boolean emailPostNotifications;
+    private boolean emailCommentNotifications;
 
-    @Column(length = 255)
-    private String bio; // 자기소개
-
-    @OneToMany(mappedBy = "userSettings", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<UserSocialLink> socialLinks = new HashSet<>();
-
-    @Column(nullable = false)
-    private String theme = "light";
-
-    @Column(nullable = false)
-    private String language = "en";
+    public UserSettings(User user) {
+        this.user = user;
+        this.bio = "";
+        this.theme = "light";
+        this.language = "en";
+        this.emailMarketing = false;
+        this.emailPostNotifications = false;
+        this.emailCommentNotifications = false;
+    }
 }

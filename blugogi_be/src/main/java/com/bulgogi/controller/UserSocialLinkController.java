@@ -1,6 +1,6 @@
 package com.bulgogi.controller;
 
-import com.bulgogi.dto.SocialLinkRequest;
+import com.bulgogi.dto.UserSocialLinkDTO;
 import com.bulgogi.model.UserSocialLink;
 import com.bulgogi.security.CustomUserDetails;
 import com.bulgogi.service.UserSocialLinkService;
@@ -25,14 +25,14 @@ public class UserSocialLinkController {
 
     // 사용자 소셜 링크 조회
     @GetMapping("/{userId}")
-    public ResponseEntity<List<UserSocialLink>> getSocialLinks(
+    public ResponseEntity<List<UserSocialLinkDTO>> getSocialLinks(
             @PathVariable Long userId,
             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
         if (!customUserDetails.getUser().getId().equals(userId)) {
             throw new SecurityException("You can only access your own social links");
         }
-        List<UserSocialLink> socialLinks = userSocialLinkService.getSocialLinksByUserId(userId);
+        List<UserSocialLinkDTO> socialLinks = userSocialLinkService.getSocialLinksByUserId(userId);
         if (socialLinks.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -43,24 +43,49 @@ public class UserSocialLinkController {
     @PostMapping("/{userId}")
     public ResponseEntity<UserSocialLink> addSocialLink(
             @PathVariable Long userId,
-            @RequestBody SocialLinkRequest request,
+            @RequestBody UserSocialLinkDTO request,
             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        // 인증된 사용자 ID와 비교
-        if (!customUserDetails.getUser().equals(userId)) {
-            throw new SecurityException("You can only social links to your own profile");
+        // 디버깅 로그
+        System.out.println("🔹 요청된 userId: " + userId);
+        System.out.println("🔹 로그인된 사용자 ID: " + customUserDetails.getUser().getId());
+
+        if (!customUserDetails.getUser().getId().equals(userId)) {
+            throw new SecurityException("You can only add social links to your own profile");
         }
 
         UserSocialLink newSocialLink = userSocialLinkService.addSocialLink(userId, request.getSocialPlatform(), request.getUrl());
         return new ResponseEntity<>(newSocialLink, HttpStatus.CREATED);
     }
 
+    // 사용자 소셜 링크 수정
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserSocialLink> updateSocialLink(
+            @PathVariable Long userId,
+            @RequestBody UserSocialLinkDTO request,
+            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+
+        System.out.println("🔹 요청된 userId: " + userId);
+        System.out.println("🔹 로그인된 사용자 ID: " + customUserDetails.getUser().getId());
+
+        if (!customUserDetails.getUser().getId().equals(userId)) {
+            throw new SecurityException("You can only access your own profile");
+        }
+
+        UserSocialLink newSocialLink = userSocialLinkService.updateSocialLink(userId, request.getSocialPlatform(), request.getUrl());
+        return new ResponseEntity<>(newSocialLink, HttpStatus.OK);
+    }
+
     // 사용자 소셜 링크 삭제
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/{userId}") //?socialPlatform={socialPlatform}
     public ResponseEntity<Void> deleteSocialLink(
             @PathVariable Long userId,
             @RequestParam String socialPlatform,
             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+
+        // 디버깅 로그
+        System.out.println("🔹 요청된 userId: " + userId);
+        System.out.println("🔹 로그인된 사용자 ID: " + customUserDetails.getUser().getId());
 
         // 인증된 사용자 ID와 비교
         if (!customUserDetails.getUser().getId().equals(userId)) {

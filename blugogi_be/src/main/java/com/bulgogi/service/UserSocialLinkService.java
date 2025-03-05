@@ -1,50 +1,65 @@
 package com.bulgogi.service;
 
-import com.bulgogi.model.UserSettings;
+import com.bulgogi.dto.UserSocialLinkDTO;
+import com.bulgogi.model.User;
 import com.bulgogi.model.UserSocialLink;
-import com.bulgogi.repository.UserSettingsRepository;
+import com.bulgogi.repository.UserRepository;
 import com.bulgogi.repository.UserSocialLinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserSocialLinkService {
 
     private final UserSocialLinkRepository userSocialLinkRepository;
-    private final UserSettingsRepository userSettingsRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserSocialLinkService(UserSocialLinkRepository userSocialLinkRepository, UserSettingsRepository userSettingsRepository) {
+    public UserSocialLinkService(UserSocialLinkRepository userSocialLinkRepository, UserRepository userRepository) {
         this.userSocialLinkRepository = userSocialLinkRepository;
-        this.userSettingsRepository = userSettingsRepository;
+        this.userRepository = userRepository;
     }
 
     // 사용자 소셜 링크 리스트 조회
-    public List<UserSocialLink> getSocialLinksByUserId(Long userId) {
-        return userSocialLinkRepository.findByUserSettingsUserId(userId);
+    public List<UserSocialLinkDTO> getSocialLinksByUserId(Long userId) {
+        List<UserSocialLink> socialLinks = userSocialLinkRepository.findByUserId(userId);
+        List<UserSocialLinkDTO> dtos = new ArrayList<>();
+
+        for (UserSocialLink link : socialLinks) {
+            UserSocialLinkDTO dto = new UserSocialLinkDTO(
+                    link.getId(),
+                    link.getSocialPlatform(),
+                    link.getUrl()
+            );
+            dtos.add(dto);
+        }
+        return dtos;
     }
 
     // 사용자 소셜 링크 삭제
     @Transactional
     public void deleteSocialLink(Long userId, String socialPlatform) {
-        userSocialLinkRepository.deleteSocialLink(userId, socialPlatform);
+        Optional<User> user = userRepository.findById(userId);
+        userSocialLinkRepository.deleteByUserIdAndSocialPlatform(userId, socialPlatform);
     }
 
     // 사용자 소셜 링크 추가
     @Transactional
     public UserSocialLink addSocialLink(Long userId, String socialPlatform, String url) {
-        // 올바른 userSettings.id 가져오기
-        UserSettings userSettings = userSettingsRepository.findByUserId(userId)
+        // user.id 가져오기
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("UserSettings not found for userId: " + userId));
 
-        System.out.println("Found UserSettings ID: " + userSettings.getId()); // 디버깅용 로그 추가
+        System.out.println("Found User ID: " + user.getId());
 
         // UserSocialLink 생성 및 저장
         UserSocialLink userSocialLink = UserSocialLink.builder()
-                .userSettings(userSettings) //userId가 아니라 userSettings 객체 사용
+                .user(user)
                 .socialPlatform(socialPlatform)
                 .url(url)
                 .build();
@@ -56,7 +71,13 @@ public class UserSocialLinkService {
     // 사용자 소셜 링크 수정
     @Transactional
     public UserSocialLink updateSocialLink(Long userId, String socialPlatform, String newUrl) {
-        UserSocialLink userSocialLink = userSocialLinkRepository.findByUserSettingsUserId(userId)
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("UserSettings not found for userId: " + userId));
+
+        System.out.println("Found User ID: " + user.getId());
+
+        UserSocialLink userSocialLink = userSocialLinkRepository.findByUserId(userId)
                 .stream()
                 .filter(link -> link.getSocialPlatform().equals(socialPlatform))
                 .findFirst()

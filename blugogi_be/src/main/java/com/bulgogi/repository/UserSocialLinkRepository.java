@@ -14,12 +14,12 @@ import java.util.List;
 public interface UserSocialLinkRepository extends JpaRepository<UserSocialLink, Long> {
 
     // 사용자에 대한 소셜 링크 리스트 조회
-    @Query("SELECT u FROM UserSocialLink u WHERE u.userSettings.user.id = :userId")
-    List<UserSocialLink> findByUserSettingsUserId(@Param("userId") Long userId);
+    @Query("SELECT u FROM UserSocialLink u WHERE u.user.id = :userId")
+    List<UserSocialLink> findByUserId(@Param("userId") Long userId);
 
     // 사용자에 대한 특정 소셜 링크 삭제
     @Modifying
     @Transactional
-    @Query("DELETE FROM UserSocialLink u WHERE u.userSettings.user.id = :userId AND u.socialPlatform = :socialPlatform")
-    void deleteSocialLink(@Param("userId") Long userId, @Param("socialPlatform") String socialPlatform);
+    @Query("DELETE FROM UserSocialLink u WHERE u.user.id = :userId AND u.socialPlatform = :socialPlatform")
+    void deleteByUserIdAndSocialPlatform(@Param("userId") Long userId, @Param("socialPlatform") String socialPlatform);
 }
