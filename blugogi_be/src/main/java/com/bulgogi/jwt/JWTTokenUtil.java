@@ -22,9 +22,10 @@ public class JWTTokenUtil {
     }
 
     // 토큰 생성
-    public String generateToken(String username) {
+    public String generateToken(String username, Long userId) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("userId", userId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(key, SignatureAlgorithm.HS256)
@@ -39,6 +40,16 @@ public class JWTTokenUtil {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    // 토큰에서 userId 추출
+    public Long extractUserId(String token) {
+        return (long) Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("userId");
     }
 
     // 토큰이 만료됐는지 확인

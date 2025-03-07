@@ -3,6 +3,8 @@ package com.bulgogi.jwt;
 import com.bulgogi.security.CustomUserDetails;
 import com.bulgogi.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.security.SignatureException;
 
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
@@ -46,8 +49,10 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             } catch (ExpiredJwtException e) {
-                // 토큰 만료 처리
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "토큰이 만료되었습니다.");
+                return;
+            } catch (MalformedJwtException | UnsupportedJwtException e) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "잘못된 토큰입니다.");
                 return;
             }
         }

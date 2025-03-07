@@ -26,17 +26,17 @@ public class UserSettings {
     private String bio;
     private String theme;
     private String language;
+    private boolean emailPost;
+    private boolean emailComment;
     private boolean emailMarketing;
-    private boolean emailPostNotifications;
-    private boolean emailCommentNotifications;
 
     public UserSettings(User user) {
         this.user = user;
         this.bio = "";
         this.theme = "light";
         this.language = "en";
+        this.emailPost = false;
+        this.emailComment = false;
         this.emailMarketing = false;
-        this.emailPostNotifications = false;
-        this.emailCommentNotifications = false;
     }
 }

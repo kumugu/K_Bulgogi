@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserSocialLinkService {
@@ -44,7 +43,8 @@ public class UserSocialLinkService {
     // 사용자 소셜 링크 삭제
     @Transactional
     public void deleteSocialLink(Long userId, String socialPlatform) {
-        Optional<User> user = userRepository.findById(userId);
+        userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found for userId: " + userId));
         userSocialLinkRepository.deleteByUserIdAndSocialPlatform(userId, socialPlatform);
     }
 
@@ -53,9 +53,7 @@ public class UserSocialLinkService {
     public UserSocialLink addSocialLink(Long userId, String socialPlatform, String url) {
         // user.id 가져오기
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("UserSettings not found for userId: " + userId));
-
-        System.out.println("Found User ID: " + user.getId());
+                .orElseThrow(() -> new RuntimeException("User not found for userId: " + userId));
 
         // UserSocialLink 생성 및 저장
         UserSocialLink userSocialLink = UserSocialLink.builder()
@@ -67,21 +65,20 @@ public class UserSocialLinkService {
         return userSocialLinkRepository.save(userSocialLink);
     }
 
-
     // 사용자 소셜 링크 수정
     @Transactional
     public UserSocialLink updateSocialLink(Long userId, String socialPlatform, String newUrl) {
 
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("UserSettings not found for userId: " + userId));
+                .orElseThrow(() -> new RuntimeException("User not found for userId: " + userId));
 
-        System.out.println("Found User ID: " + user.getId());
-
-        UserSocialLink userSocialLink = userSocialLinkRepository.findByUserId(userId)
-                .stream()
-                .filter(link -> link.getSocialPlatform().equals(socialPlatform))
-                .findFirst()
+        UserSocialLink userSocialLink = userSocialLinkRepository.findByUserIdAndSocialPlatform(userId, socialPlatform)
                 .orElseThrow(() -> new RuntimeException("Social link not found"));
+
+        // 새로운 URL이 유효한지 확인
+        if (newUrl == null || newUrl.isEmpty()) {
+            throw new IllegalArgumentException("The new URL cannot be null or empty.");
+        }
 
         userSocialLink.setUrl(newUrl);
         return userSocialLinkRepository.save(userSocialLink);

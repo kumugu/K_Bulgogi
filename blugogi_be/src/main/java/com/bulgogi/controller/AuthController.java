@@ -4,6 +4,7 @@ import com.bulgogi.dto.LoginRequest;
 import com.bulgogi.dto.LoginResponse;
 import com.bulgogi.dto.UserRequestDTO;
 import com.bulgogi.jwt.JWTTokenUtil;
+import com.bulgogi.model.User;
 import com.bulgogi.service.AuthService;
 import com.bulgogi.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -44,8 +45,12 @@ public class AuthController {
             return ResponseEntity.status(401).body(new LoginResponse("로그인 실패: 아이디 또는 비밀번호가 잘못되었습니다."));
         }
 
+        // 인증 성공 시 userId 가져오기
+        User user = userService.getUserByUsername(username);
+        Long userId = user.getId();
+
         // 인증 성공 시 JWT 토큰 생성
-        String token = jwtTokenUtil.generateToken(username);
+        String token = jwtTokenUtil.generateToken(username, userId);
 
         // JWT 토큰을 응답으로 반환
         return ResponseEntity.ok(new LoginResponse(token));

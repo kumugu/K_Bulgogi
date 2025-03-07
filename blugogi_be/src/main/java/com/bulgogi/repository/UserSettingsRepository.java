@@ -23,23 +23,23 @@ public interface UserSettingsRepository extends JpaRepository<UserSettings, Long
     @Query("UPDATE UserSettings u SET u.bio = :bio WHERE u.user.id = :userId")
     void updateBio(@Param("userId") Long userId, @Param("bio") String bio);
 
+    // 이메일 게시글 알림 업데이트
+    @Modifying
+    @Transactional
+    @Query("UPDATE UserSettings u SET u.emailPost = :emailPost WHERE u.user.id = :userId")
+    void updateEmailPost(@Param("userId") Long userId, @Param("emailPost") boolean emailPost);
+
+    // 이메일 댓글 알림 업데이트
+    @Modifying
+    @Transactional
+    @Query("UPDATE UserSettings u SET u.emailComment = :emailComment WHERE u.user.id = :userId")
+    void updateEmailComment(@Param("userId") Long userID, @Param("emailComment") boolean emailComment);
+
     // 이메일 마케팅 알림 업데이트
     @Modifying
     @Transactional
     @Query("UPDATE UserSettings u SET u.emailMarketing = :emailMarketing WHERE u.user.id = :userId")
     void updateEmailMarketing(@Param("userId") Long userId, @Param("emailMarketing") boolean emailMarketing);
-
-    // 이메일 게시글 알림 업데이트
-    @Modifying
-    @Transactional
-    @Query("UPDATE UserSettings u SET u.emailPostNotifications = :emailPostNotifications WHERE u.user.id = :userId")
-    void updateEmailPostNotifications(@Param("userId") Long userId, @Param("emailPostNotifications") boolean emailPostNotifications);
-
-    // 이메일 댓글 알림 업데이트
-    @Modifying
-    @Transactional
-    @Query("UPDATE UserSettings u SET u.emailCommentNotifications = :emailCommentNotifications WHERE u.user.id = :userId")
-    void updateEmailCommentNotifications(@Param("userId") Long userID, @Param("emailCommentNotifications") boolean emailCommentNotifications);
 
     // 테마 업데이트
     @Modifying

@@ -47,8 +47,8 @@ public class UserSocialLinkController {
             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
         // 디버깅 로그
-        System.out.println("🔹 요청된 userId: " + userId);
-        System.out.println("🔹 로그인된 사용자 ID: " + customUserDetails.getUser().getId());
+        System.out.println(" 요청된 userId: " + userId);
+        System.out.println(" 로그인된 사용자 ID: " + customUserDetails.getUser().getId());
 
         if (!customUserDetails.getUser().getId().equals(userId)) {
             throw new SecurityException("You can only add social links to your own profile");
@@ -65,8 +65,8 @@ public class UserSocialLinkController {
             @RequestBody UserSocialLinkDTO request,
             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        System.out.println("🔹 요청된 userId: " + userId);
-        System.out.println("🔹 로그인된 사용자 ID: " + customUserDetails.getUser().getId());
+        System.out.println(" 요청된 userId: " + userId);
+        System.out.println(" 로그인된 사용자 ID: " + customUserDetails.getUser().getId());
 
         if (!customUserDetails.getUser().getId().equals(userId)) {
             throw new SecurityException("You can only access your own profile");
@@ -84,8 +84,8 @@ public class UserSocialLinkController {
             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
         // 디버깅 로그
-        System.out.println("🔹 요청된 userId: " + userId);
-        System.out.println("🔹 로그인된 사용자 ID: " + customUserDetails.getUser().getId());
+        System.out.println(" 요청된 userId: " + userId);
+        System.out.println(" 로그인된 사용자 ID: " + customUserDetails.getUser().getId());
 
         // 인증된 사용자 ID와 비교
         if (!customUserDetails.getUser().getId().equals(userId)) {

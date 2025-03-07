@@ -6,9 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserSocialLinkDTO {
-    private final Long id;
+    private Long id;
     private String socialPlatform;
     private String url;
+
+    public UserSocialLinkDTO() {}
 
     public UserSocialLinkDTO(Long id) {
         this.id = id;

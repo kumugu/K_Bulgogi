@@ -41,9 +41,9 @@ public class AuthService {
                 .bio("")  // 기본값 설정 (빈 문자열)
                 .theme("light")  // 기본 테마
                 .language("en")  // 기본 언어 설정
+                .emailPost(true)  // 게시글 알림 여부 (기본값: true)
+                .emailComment(true)  // 댓글 알림 여부 (기본값: true)
                 .emailMarketing(true)  // 마케팅 이메일 수신 (기본값: true)
-                .emailPostNotifications(true)  // 게시글 알림 여부 (기본값: true)
-                .emailCommentNotifications(true)  // 댓글 알림 여부 (기본값: true)
                 .build();
 
         userSettingsRepository.save(userSettings); // 정상 호출 가능

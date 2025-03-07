@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserSocialLinkRepository extends JpaRepository<UserSocialLink, Long> {
@@ -22,4 +23,7 @@ public interface UserSocialLinkRepository extends JpaRepository<UserSocialLink, 
     @Transactional
     @Query("DELETE FROM UserSocialLink u WHERE u.user.id = :userId AND u.socialPlatform = :socialPlatform")
     void deleteByUserIdAndSocialPlatform(@Param("userId") Long userId, @Param("socialPlatform") String socialPlatform);
+
+    // userId와 SocialPlatform을 동시에 검색하는 메서드
+    Optional<UserSocialLink> findByUserIdAndSocialPlatform(Long userId, String socialPlatform);
 }

@@ -2,9 +2,9 @@ package com.bulgogi.service;
 
 import com.bulgogi.model.UserSettings;
 import com.bulgogi.repository.UserSettingsRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserSettingsService {
@@ -32,37 +32,65 @@ public class UserSettingsService {
         userSettingsRepository.deleteByUserId(userId);
     }
 
+    // 공통 업데이트 메서드
+    private void updateUserSetting(Long userId, String field, Object value) {
+        switch (field) {
+            case "bio":
+                userSettingsRepository.updateBio(userId, (String) value);
+                break;
+            case "emailPost":
+                userSettingsRepository.updateEmailPost(userId, (Boolean) value);
+                break;
+            case "emailComment":
+                userSettingsRepository.updateEmailComment(userId, (Boolean) value);
+                break;
+            case "emailMarketing":
+                userSettingsRepository.updateEmailMarketing(userId, (Boolean) value);
+                break;
+            case "theme":
+                userSettingsRepository.updateTheme(userId, (String) value);
+                break;
+            case "language":
+                userSettingsRepository.updateLanguage(userId, (String) value);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid field: " + field);
+        }
+    }
+
     // 자기소개 업데이트
     @Transactional
     public void updateBio(Long userId, String bio) {
-        userSettingsRepository.updateBio(userId, bio);
-        userSettingsRepository.flush();
-    }
-
-    // 이메일 마케팅 설정 업데이트
-    public void updateEmailMarketing(Long userId, boolean emailMarketing) {
-        userSettingsRepository.updateEmailMarketing(userId, emailMarketing);
+        updateUserSetting(userId, "bio", bio);
     }
 
     // 이메일 게시글 알림 설정 업데이트
-    public void updateEmailPostNotifications(Long userId, boolean emailPostNotifications) {
-        userSettingsRepository.updateEmailPostNotifications(userId, emailPostNotifications);
+    @Transactional
+    public void updateEmailPost(Long userId, boolean emailPost) {
+        updateUserSetting(userId, "emailPost", emailPost);
     }
 
     // 이메일 댓글 알림 설정 업데이트
-    public void updateEmailCommentNotifications(Long userId, boolean emailCommentNotifications) {
-        userSettingsRepository.updateEmailCommentNotifications(userId, emailCommentNotifications);
+    @Transactional
+    public void updateEmailComment(Long userId, boolean emailComment) {
+        updateUserSetting(userId, "emailComment", emailComment);
+    }
+
+    // 이메일 마케팅 설정 업데이트
+    @Transactional
+    public void updateEmailMarketing(Long userId, boolean emailMarketing) {
+        updateUserSetting(userId, "emailMarketing", emailMarketing);
     }
 
     // 테마 업데이트
+    @Transactional
     public void updateTheme(Long userId, String theme) {
-        userSettingsRepository.updateTheme(userId, theme);
+        updateUserSetting(userId, "theme", theme);
     }
 
     // 언어 설정 업데이트
+    @Transactional
     public void updateLanguage(Long userId, String language) {
-        userSettingsRepository.updateLanguage(userId, language);
+        updateUserSetting(userId, "language", language);
     }
 }
-
-
