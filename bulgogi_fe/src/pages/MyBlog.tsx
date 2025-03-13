@@ -30,7 +30,7 @@ export default function MyBlog() {
   const { username } = useParams<{ username: string }>()
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(["All"]))
   const [posts, setPosts] = useState<Post[]>([])
-  const [profile, setProfile] = useState<Profile>({
+  const [profile] = useState<Profile>({
     username: username || "",
     bio: "Writing about technology and life",
     followers: 128,

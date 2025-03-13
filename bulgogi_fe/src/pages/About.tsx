@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 export default function AboutPage() {
@@ -24,7 +23,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src="/placeholder.svg?height=500&width=600"
+                src="/images/about.svg"
                 alt="Our story"
                 className="rounded-2xl shadow-lg"
               />
@@ -103,22 +102,22 @@ export default function AboutPage() {
               {
                 name: "Kumgu Kim",
                 role: "Founder & CEO",
-                image: "/placeholder.svg?height=300&width=300",
+                image: "/images/111.svg",
               },
               {
-                name: "Buha jikwon 1",
+                name: "amuge",
                 role: "Head of Design",
-                image: "/placeholder.svg?height=300&width=300",
+                image: "/images/222.svg",
               },
               {
-                name: "Buha jikwon 2",
+                name: "choongang",
                 role: "Lead Developer",
-                image: "/placeholder.svg?height=300&width=300",
+                image: "/images/333.svg",
               },
               {
-                name: "Buha jikwon 3",
+                name: "HK Kim",
                 role: "Community Manager",
-                image: "/placeholder.svg?height=300&width=300",
+                image: "/images/444.svg",
               },
             ].map((member, index) => (
               <div key={index} className="text-center">

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { isTokenValid } from "../services/authService";
+// import { isTokenValid } from "../services/authService";
 import Link from "next/link";
 import { ArrowRight } from "react-feather";
 
@@ -53,7 +53,7 @@ export default function LandingPage() {
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-100 shadow-xl">
                 <img
-                  src="/placeholder.svg?height=600&width=800"
+                  src="/images/Landing1.svg"
                   alt="Writing inspiration"
                   className="w-full h-full object-cover"
                 />
@@ -112,10 +112,10 @@ export default function LandingPage() {
             <footer className="mt-8">
               <div className="flex items-center justify-center">
                 <div className="flex-shrink-0 mr-3">
-                  <img className="h-10 w-10 rounded-full" src="/placeholder.svg?height=40&width=40" alt="User avatar" />
+                
                 </div>
                 <div className="text-base">
-                  <div className="font-medium text-neutral-900">Kim Ji-min</div>
+                  <div className="font-medium text-neutral-900">Kim Kumgu</div>
                   <div className="text-neutral-500">Writer & Blogger</div>
                 </div>
               </div>

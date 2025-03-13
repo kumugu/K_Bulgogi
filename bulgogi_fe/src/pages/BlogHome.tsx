@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "react-feather";
 
@@ -34,12 +34,12 @@ export default function BlogHomePage() {
           id: 1,
           title: "The Art of Creative Writing",
           excerpt: "Exploring techniques to unlock your creative potential and overcome writer's block.",
-          author: "Alex Kim",
+          author: "Kumgu Kim",
           date: "Feb 15, 2025",
           readTime: "8 min read",
           category: "Writing",
-          imageUrl: "/placeholder.svg?height=400&width=600",
-          authorImageUrl: "/placeholder.svg?height=40&width=40"
+          imageUrl: "/images/111.svg",
+          authorImageUrl: "/images/111.svg"
         },
         {
           id: 2,
@@ -49,8 +49,8 @@ export default function BlogHomePage() {
           date: "Feb 22, 2025",
           readTime: "6 min read",
           category: "Strategy",
-          imageUrl: "/placeholder.svg?height=400&width=600",
-          authorImageUrl: "/placeholder.svg?height=40&width=40"
+          imageUrl: "/images/222.svg",
+          authorImageUrl: "/images/222.svg"
         },
         {
           id: 3,
@@ -60,8 +60,8 @@ export default function BlogHomePage() {
           date: "Feb 10, 2025",
           readTime: "5 min read",
           category: "Writing",
-          imageUrl: "/placeholder.svg?height=400&width=600",
-          authorImageUrl: "/placeholder.svg?height=40&width=40"
+          imageUrl: "/images/333.svg",
+          authorImageUrl: "/images/333.svg"
         }
       ];
       
@@ -82,8 +82,8 @@ export default function BlogHomePage() {
           date: "Feb 25, 2025",
           readTime: "7 min read",
           category: "Tools",
-          imageUrl: "/placeholder.svg?height=300&width=400",
-          authorImageUrl: "/placeholder.svg?height=40&width=40"
+          imageUrl: "/images/444.svg",
+          authorImageUrl: "/images/444.svg"
         },
         {
           id: 5,
@@ -93,8 +93,8 @@ export default function BlogHomePage() {
           date: "Feb 23, 2025",
           readTime: "9 min read",
           category: "Marketing",
-          imageUrl: "/placeholder.svg?height=300&width=400",
-          authorImageUrl: "/placeholder.svg?height=40&width=40"
+          imageUrl: "/images/555.svg",
+          authorImageUrl: "/images/222.svg"
         },
         {
           id: 6,
@@ -104,8 +104,8 @@ export default function BlogHomePage() {
           date: "Feb 21, 2025",
           readTime: "6 min read",
           category: "SEO",
-          imageUrl: "/placeholder.svg?height=300&width=400",
-          authorImageUrl: "/placeholder.svg?height=40&width=40"
+          imageUrl: "/images/111.svg",
+          authorImageUrl: "/images/111.svg"
         },
         {
           id: 7,
@@ -115,8 +115,8 @@ export default function BlogHomePage() {
           date: "Feb 19, 2025",
           readTime: "5 min read",
           category: "Strategy",
-          imageUrl: "/placeholder.svg?height=300&width=400",
-          authorImageUrl: "/placeholder.svg?height=40&width=40"
+          imageUrl: "/images/555.svg",
+          authorImageUrl: "/images/555.svg"
         },
         {
           id: 8,
@@ -126,8 +126,8 @@ export default function BlogHomePage() {
           date: "Feb 17, 2025",
           readTime: "4 min read",
           category: "Writing",
-          imageUrl: "/placeholder.svg?height=300&width=400",
-          authorImageUrl: "/placeholder.svg?height=40&width=40"
+          imageUrl: "/images/333.svg",
+          authorImageUrl: "/images/222.svg"
         },
         {
           id: 9,
@@ -137,8 +137,8 @@ export default function BlogHomePage() {
           date: "Feb 16, 2025",
           readTime: "8 min read",
           category: "Community",
-          imageUrl: "/placeholder.svg?height=300&width=400",
-          authorImageUrl: "/placeholder.svg?height=40&width=40"
+          imageUrl: "/images/444.svg",
+          authorImageUrl: "/images/444.svg"
         }
       ];
       
