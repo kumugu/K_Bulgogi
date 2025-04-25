@@ -1,2 +1,1 @@
-./gradlew bootRun
-npm run dev
+Bulgogi 초기 작업 레포지토리
